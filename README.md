@@ -1,50 +1,37 @@
-# React + TypeScript + Vite
+Your task is to create a one-page application that shows a list of peoples and the details about their vehicles. The data to display are available using the following APIs:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GEThttps://swapi.dev/api/people
 
-Currently, two official plugins are available:
+GET http://swapi.co/api/vehicles/{vehicleId}/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+● the candidate has to implement a view that contains a list of users
+○ for each user we need to display the following information:
+■ name
+■ height
+■ mass
+■ gender
+■ edited
+■ Show vehicles (button)
+○ the user must be able to filter the users by name and the filtering must happen server side (use the search parameter, e.g. https://swapi.co/api/people/?search=lu)
+● when the user clicks the “Show vehicles” button a popup is displayed:
+○ the popup must contains a list vehicles
+○ for each vehicle we need to display the following information:
+■ name
+■ model
+■ manufacturer
+■ vehicle_class
 
-## Expanding the ESLint configuration
+● Javascript ES6 (no CoffeeScript, no TypeScript, …)
+● React.js
+● Redux
+● build tool of your choice
+● the usage of any NPM module is allowed (UI Component Library, utilities, ...)
+● the usage of CSS framework, CSS/HTML preprocessors is allowed
+● the candidate has to publish his work on GitHub
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Optional
+● usage of a linter tool and/or a type checker
+● usage of Styled Components (or similar framework)
+● usage of a responsive design
+● implementation of tests
+● Usage of Material UI library for implementation https://mui.com/
