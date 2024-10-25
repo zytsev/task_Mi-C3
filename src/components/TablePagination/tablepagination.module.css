@@ -1,0 +1,9 @@
+.footer_table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.span {
+    padding-left: 1rem;
+    font-family: 'Roboto';
+}
