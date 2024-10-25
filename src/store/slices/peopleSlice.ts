@@ -1,10 +1,12 @@
-import { buildCreateSlice, asyncThunkCreator } from '@reduxjs/toolkit';
-import { Data, PeopleState } from '../../assets/types';
+import { buildCreateSlice, asyncThunkCreator, PayloadAction } from '@reduxjs/toolkit';
+import { Data, PeopleState, queryType } from '../../assets/types';
 
 const initialState: PeopleState = {
     data: null,
     loading: false,
     error: '',
+    page: 1,
+    searchName: '',
 };
 
 const createSlice = buildCreateSlice({
@@ -18,15 +20,20 @@ const peopleSlice = createSlice({
         selectPeople: (state) => state,
     },
     reducers: (create) => ({
-        fetchPeople: create.asyncThunk<Data, string | null, { rejectValue: string }>(
-            async function (link: string | null, { rejectWithValue }) {
-                const url = link ? link : 'https://swapi.dev/api/people/';
+        setPage: create.reducer((state, action: PayloadAction<number>) => {
+            state.page = action.payload;
+        }),
+        setSearchName: create.reducer((state, action: PayloadAction<string>) => {
+            state.searchName = action.payload;
+        }),
+        fetchPeople: create.asyncThunk<Data, queryType, { rejectValue: string }>(
+            async function (query: queryType, { rejectWithValue }) {
+                const url = `https://swapi.dev/api/people/?page=${query.page}&search=${query.searchParam}`;
                 try {
                     const response = await fetch(url);
                     if (!response.ok) {
                         throw new Error(`Response status: ${response.status}`);
                     }
-
                     const json = await response.json();
                     return json;
                 } catch (error) {
@@ -54,6 +61,6 @@ const peopleSlice = createSlice({
     }),
 });
 
-export const { fetchPeople } = peopleSlice.actions;
+export const { fetchPeople, setPage, setSearchName } = peopleSlice.actions;
 export const { selectPeople } = peopleSlice.selectors;
 export default peopleSlice.reducer;

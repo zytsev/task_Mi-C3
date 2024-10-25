@@ -1,4 +1,3 @@
-import React from 'react';
 import { People } from '../../assets/types';
 import { TableCell, TableRow, Button } from '@mui/material';
 

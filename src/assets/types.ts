@@ -16,4 +16,10 @@ export type PeopleState = {
     data: Data | null;
     loading: boolean;
     error: string;
+    page: number;
+    searchName: string;
 };
+export interface queryType {
+    page: number;
+    searchParam: string;
+}
