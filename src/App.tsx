@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { fetchPeople, selectPeople } from './store/slices/peopleSlice';
@@ -6,10 +6,19 @@ import RowTable from './components/RowTable/RowTable';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
 import TablePaginationActions from './components/TablePagination/TablePagination';
 import SearchNameField from './components/SearchName/SearchNameField';
+import Modal from './components/Modal/Modal';
 
 function App() {
     const { data, loading, error } = useAppSelector(selectPeople);
     const dispatch = useAppDispatch();
+
+    const [openModal, setOpenModal] = useState(false);
+    const [dataModal, setDataModal] = useState<string[]>([]);
+    const handleOpenModal = (arr: string[]) => {
+        setOpenModal(true);
+        setDataModal(arr);
+    };
+    const handleCloseModal = () => setOpenModal(false);
 
     useEffect(() => {
         dispatch(
@@ -39,7 +48,7 @@ function App() {
                     </TableHead>
                     <TableBody>
                         {data?.results.map((elem) => (
-                            <RowTable key={elem.name} {...elem} />
+                            <RowTable key={elem.name} {...elem} handleOpenModal={handleOpenModal} />
                         ))}
                     </TableBody>
                     <TableFooter>
@@ -50,6 +59,7 @@ function App() {
                 </Table>
             </TableContainer>
             {loading && <h2 className='loading_title'>Loading...</h2>}
+            <Modal openModal={openModal} handleCloseModal={handleCloseModal} dataModal={dataModal} />
         </div>
     );
 }

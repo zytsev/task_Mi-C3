@@ -5,6 +5,7 @@ export interface People {
     gender: string;
     edited: string;
     vehicles: string[];
+    handleOpenModal: (arr: string[]) => void;
 }
 export type Data = {
     count: number;
@@ -22,4 +23,15 @@ export type PeopleState = {
 export interface queryType {
     page: number;
     searchParam: string;
+}
+export interface Vehicle {
+    name: string;
+    model: string;
+    manufacturer: string;
+    vehicle_class: string;
+}
+export interface propsModal {
+    handleCloseModal: () => void;
+    openModal: boolean;
+    dataModal: string[];
 }
